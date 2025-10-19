@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "clean": "pnpm -r exec rm -rf dist node_modules"
+  }
+}

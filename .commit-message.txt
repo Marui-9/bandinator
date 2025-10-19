@@ -1,0 +1,38 @@
+# Bandinator - Initial Setup
+
+This commit sets up the complete monorepo structure for the Bandinator project.
+
+## What's included:
+
+### Root configuration
+- pnpm workspaces setup
+- TypeScript, ESLint, Prettier configuration
+- Husky for pre-commit hooks
+- GitHub Actions CI workflow
+- Docker Compose for production deployment
+
+### Backend (packages/app-backend)
+- Express.js API server with TypeScript
+- SQLite database with schema for documents, tenders, rules, and analysis
+- Document parsing (PDF, DOCX, TXT)
+- Rule engine for automated analysis
+- PDF and CSV export functionality
+- REST API endpoints for all features
+
+### Frontend (packages/app-frontend)
+- React + Vite + TypeScript
+- TailwindCSS for styling
+- React Router for navigation
+- Axios for API calls
+- Complete UI for all features:
+  - Document upload and management
+  - Tender creation and management
+  - Rules configuration
+  - Analysis execution and visualization
+  - PDF and CSV export
+
+## Next steps:
+1. Run `pnpm install` to install dependencies
+2. Run `pnpm dev` to start development servers
+3. Backend will be at http://localhost:3001
+4. Frontend will be at http://localhost:3000
