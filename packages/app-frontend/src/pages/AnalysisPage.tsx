@@ -14,6 +14,7 @@ interface AnalysisResult {
   feasibility_score: number;
   confidence: number;
   summary: string;
+  evidence?: string;
   rule_results: string;
   created_at: string;
 }
@@ -116,7 +117,8 @@ export default function AnalysisPage() {
 
   const ruleResults = analysis?.rule_results ? JSON.parse(analysis.rule_results) : [];
   const score = analysis?.feasibility_score || 0;
-  const scoreColor = score >= 70 ? 'text-green-600' : score >= 40 ? 'text-yellow-600' : 'text-red-600';
+  const scoreColor =
+    score >= 70 ? 'text-green-600' : score >= 40 ? 'text-yellow-600' : 'text-red-600';
   const scoreBg = score >= 70 ? 'bg-green-100' : score >= 40 ? 'bg-yellow-100' : 'bg-red-100';
 
   return (
@@ -187,9 +189,7 @@ export default function AnalysisPage() {
 
             <div className={`${scoreBg} rounded-lg p-8 text-center mb-6`}>
               <div className={`text-6xl font-bold ${scoreColor}`}>{score.toFixed(1)}%</div>
-              <div className="text-sm text-gray-600 mt-2">
-                Confidence: {analysis.confidence}%
-              </div>
+              <div className="text-sm text-gray-600 mt-2">Confidence: {analysis.confidence}%</div>
             </div>
 
             <div className="mb-6">
@@ -201,7 +201,9 @@ export default function AnalysisPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-2">Evidence</h3>
                 <div className="bg-gray-50 rounded-lg p-4">
-                  <pre className="text-sm text-gray-700 whitespace-pre-wrap">{analysis.evidence}</pre>
+                  <pre className="text-sm text-gray-700 whitespace-pre-wrap">
+                    {analysis.evidence}
+                  </pre>
                 </div>
               </div>
             )}
@@ -219,7 +221,9 @@ export default function AnalysisPage() {
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
-                          <span className={`text-2xl ${result.matched ? 'text-green-600' : 'text-red-600'}`}>
+                          <span
+                            className={`text-2xl ${result.matched ? 'text-green-600' : 'text-red-600'}`}
+                          >
                             {result.matched ? '✓' : '✗'}
                           </span>
                           <h3 className="text-lg font-semibold">{result.rule_name}</h3>
