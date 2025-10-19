@@ -1,10 +1,20 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { FileText, Database, GitBranch, BarChart3, FileDown } from 'lucide-react';
+import {
+  FileText,
+  Database,
+  GitBranch,
+  BarChart3,
+  FileDown,
+  Search,
+  MessageSquare,
+} from 'lucide-react';
 import DocumentsPage from './pages/DocumentsPage';
 import TendersPage from './pages/TendersPage';
 import RulesPage from './pages/RulesPage';
 import AnalysisPage from './pages/AnalysisPage';
 import HomePage from './pages/HomePage';
+import ChatPage from './pages/ChatPage';
+import KBSearchPage from './pages/KBSearchPage';
 
 function App() {
   return (
@@ -33,6 +43,12 @@ function App() {
                   <NavLink to="/analysis" icon={<BarChart3 size={20} />}>
                     Analysis
                   </NavLink>
+                  <NavLink to="/kb-search" icon={<Search size={20} />}>
+                    Search
+                  </NavLink>
+                  <NavLink to="/chat" icon={<MessageSquare size={20} />}>
+                    Chat
+                  </NavLink>
                 </div>
               </div>
             </div>
@@ -46,6 +62,8 @@ function App() {
             <Route path="/tenders" element={<TendersPage />} />
             <Route path="/rules" element={<RulesPage />} />
             <Route path="/analysis" element={<AnalysisPage />} />
+            <Route path="/kb-search" element={<KBSearchPage />} />
+            <Route path="/chat" element={<ChatPage />} />
           </Routes>
         </main>
       </div>

@@ -17,12 +17,35 @@ router.post('/run/:tenderId', async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Tender not found' });
     }
 
+    // Set status to in-progress
+    db.prepare('UPDATE tenders SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?').run(
+      'in-progress',
+      tenderId
+    );
+
     // Run analysis
     const result = await runAnalysis(tender);
+
+    // Set status to complete
+    db.prepare('UPDATE tenders SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?').run(
+      'complete',
+      tenderId
+    );
 
     res.json(result);
   } catch (error) {
     console.error('Analysis error:', error);
+
+    // Set status back to pending on error
+    try {
+      db.prepare('UPDATE tenders SET status = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?').run(
+        'pending',
+        req.params.tenderId
+      );
+    } catch (updateError) {
+      console.error('Failed to update tender status:', updateError);
+    }
+
     res.status(500).json({ error: 'Failed to run analysis' });
   }
 });

@@ -18,6 +18,7 @@ export function initDatabase() {
       file_type TEXT NOT NULL,
       file_size INTEGER NOT NULL,
       content TEXT,
+      attributes TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
@@ -32,7 +33,9 @@ export function initDatabase() {
       budget REAL,
       description TEXT,
       requirements TEXT,
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      status TEXT DEFAULT 'pending',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
 

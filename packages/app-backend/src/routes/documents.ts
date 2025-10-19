@@ -43,17 +43,27 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
     }
 
     const { filename, originalname, path: filePath, mimetype, size } = req.file;
+    const { attributes } = req.body; // Get attributes from form data
 
     // Parse document content
     const content = await parseDocument(filePath, mimetype);
 
     // Save to database
     const stmt = db.prepare(`
-      INSERT INTO documents (filename, original_name, file_path, file_type, file_size, content)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO documents (filename, original_name, file_path, file_type, file_size, content, attributes)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    const result = stmt.run(filename, originalname, filePath, mimetype, size, content);
+    const attributesJson = attributes ? JSON.stringify(JSON.parse(attributes)) : null;
+    const result = stmt.run(
+      filename,
+      originalname,
+      filePath,
+      mimetype,
+      size,
+      content,
+      attributesJson
+    );
 
     res.json({
       id: result.lastInsertRowid,
@@ -61,6 +71,7 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
       originalName: originalname,
       fileType: mimetype,
       fileSize: size,
+      attributes: attributesJson ? JSON.parse(attributesJson) : null,
       message: 'Document uploaded successfully',
     });
   } catch (error) {
@@ -73,7 +84,7 @@ router.post('/upload', upload.single('file'), async (req: Request, res: Response
 router.get('/', (_req: Request, res: Response) => {
   try {
     const stmt = db.prepare(`
-      SELECT id, filename, original_name, file_type, file_size, created_at
+      SELECT id, filename, original_name, file_type, file_size, attributes, created_at
       FROM documents
       ORDER BY created_at DESC
     `);

@@ -57,4 +57,8 @@ export const exportCSV = (analysisId: number) => {
   });
 };
 
+// Knowledge Base
+export const searchKB = (query: string) => api.get(`/kb/search?q=${encodeURIComponent(query)}`);
+export const chatWithKB = (message: string) => api.post('/kb/chat', { message });
+
 export default api;

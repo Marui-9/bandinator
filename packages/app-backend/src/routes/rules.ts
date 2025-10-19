@@ -26,6 +26,11 @@ router.post('/', (req: Request, res: Response) => {
       enabled !== false ? 1 : 0
     );
 
+    // Reset all tender statuses to pending when new rule is added
+    db.prepare(
+      "UPDATE tenders SET status = 'pending', updated_at = CURRENT_TIMESTAMP WHERE status = 'complete'"
+    ).run();
+
     res.json({
       id: result.lastInsertRowid,
       message: 'Rule created successfully',
@@ -81,19 +86,16 @@ router.put('/:id', (req: Request, res: Response) => {
       WHERE id = ?
     `);
 
-    const result = stmt.run(
-      name,
-      description,
-      ruleType,
-      condition,
-      weight,
-      enabled ? 1 : 0,
-      id
-    );
+    const result = stmt.run(name, description, ruleType, condition, weight, enabled ? 1 : 0, id);
 
     if (result.changes === 0) {
       return res.status(404).json({ error: 'Rule not found' });
     }
+
+    // Reset all tender statuses to pending when rules change
+    db.prepare(
+      "UPDATE tenders SET status = 'pending', updated_at = CURRENT_TIMESTAMP WHERE status = 'complete'"
+    ).run();
 
     res.json({ message: 'Rule updated successfully' });
   } catch (error) {
