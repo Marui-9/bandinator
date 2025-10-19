@@ -1,8 +1,9 @@
 import Database from 'better-sqlite3';
+import type BetterSqlite3 from 'better-sqlite3';
 import path from 'path';
 
 const dbPath = process.env.DATABASE_URL || './data/bandinator.db';
-const db = new Database(dbPath);
+const db: BetterSqlite3.Database = new Database(dbPath);
 
 export function initDatabase() {
   // Enable foreign keys

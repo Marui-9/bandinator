@@ -1,7 +1,8 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import db from '../services/database';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // Create tender
 router.post('/', (req: Request, res: Response) => {

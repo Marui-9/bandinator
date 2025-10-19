@@ -1,8 +1,9 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import db from '../services/database';
 import { runAnalysis } from '../services/analysis';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // Run analysis for a tender
 router.post('/run/:tenderId', async (req: Request, res: Response) => {
@@ -11,7 +12,7 @@ router.post('/run/:tenderId', async (req: Request, res: Response) => {
 
     // Get tender
     const tenderStmt = db.prepare('SELECT * FROM tenders WHERE id = ?');
-    const tender = tenderStmt.get(tenderId);
+    const tender = tenderStmt.get(tenderId) as any;
 
     if (!tender) {
       return res.status(404).json({ error: 'Tender not found' });

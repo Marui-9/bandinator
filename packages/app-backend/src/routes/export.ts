@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import { generatePDF } from '../services/pdf-generator';
 import { generateCSV } from '../services/csv-generator';
 import db from '../services/database';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // Export analysis as PDF
 router.get('/pdf/:analysisId', async (req: Request, res: Response) => {
@@ -17,7 +18,7 @@ router.get('/pdf/:analysisId', async (req: Request, res: Response) => {
       JOIN tenders t ON ar.tender_id = t.id
       WHERE ar.id = ?
     `);
-    const analysis = stmt.get(analysisId);
+    const analysis = stmt.get(analysisId) as any;
 
     if (!analysis) {
       return res.status(404).json({ error: 'Analysis not found' });
@@ -31,15 +32,12 @@ router.get('/pdf/:analysisId', async (req: Request, res: Response) => {
       WHERE rr.analysis_id = ?
       ORDER BY rr.score DESC
     `);
-    const ruleResults = ruleStmt.all(analysisId);
+    const ruleResults = ruleStmt.all(analysisId) as any[];
 
     const pdfBuffer = await generatePDF(analysis, ruleResults);
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
-      'Content-Disposition',
-      `attachment; filename="analysis-${analysisId}.pdf"`
-    );
+    res.setHeader('Content-Disposition', `attachment; filename="analysis-${analysisId}.pdf"`);
     res.send(pdfBuffer);
   } catch (error) {
     console.error('PDF export error:', error);
@@ -60,7 +58,7 @@ router.get('/csv/:analysisId', async (req: Request, res: Response) => {
       WHERE rr.analysis_id = ?
       ORDER BY rr.score DESC
     `);
-    const ruleResults = ruleStmt.all(analysisId);
+    const ruleResults = ruleStmt.all(analysisId) as any[];
 
     if (ruleResults.length === 0) {
       return res.status(404).json({ error: 'No results found for this analysis' });
@@ -69,10 +67,7 @@ router.get('/csv/:analysisId', async (req: Request, res: Response) => {
     const csvData = await generateCSV(ruleResults);
 
     res.setHeader('Content-Type', 'text/csv');
-    res.setHeader(
-      'Content-Disposition',
-      `attachment; filename="analysis-${analysisId}.csv"`
-    );
+    res.setHeader('Content-Disposition', `attachment; filename="analysis-${analysisId}.csv"`);
     res.send(csvData);
   } catch (error) {
     console.error('CSV export error:', error);

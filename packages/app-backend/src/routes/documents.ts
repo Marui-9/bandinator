@@ -1,11 +1,12 @@
 import { Router, Request, Response } from 'express';
+import type { Router as ExpressRouter } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import db from '../services/database';
 import { parseDocument } from '../services/parser';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
