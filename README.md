@@ -1,10 +1,10 @@
-# Bandinator
+# Team-Wiki
 
 > Demo web app for tender document analysis with feasibility scoring
 
 ## Overview
 
-Bandinator ingests documents, indexes a searchable knowledge base, parses tenders, runs configurable rules to produce a feasibility score with evidence links, and exports results as PDF and CSV.
+Team-Wiki ingests documents, indexes a searchable knowledge base, parses tenders, runs configurable rules to produce a feasibility score with evidence links, and exports results as PDF and CSV.
 
 ## Features
 
@@ -46,6 +46,7 @@ pnpm dev
 ```
 
 The app will be available at:
+
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:3001
 
@@ -62,7 +63,7 @@ docker-compose up -d
 ## Project Structure
 
 ```
-bandinator/
+team-wiki/
 ├── packages/
 │   ├── app-backend/          # Express API server
 │   │   ├── src/

@@ -3,7 +3,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 
 const router: Router = Router();
-const dbPath = path.join(process.cwd(), 'data', 'bandinator.db');
+const dbPath = path.join(process.cwd(), 'data', 'team-wiki.db');
 
 // Search across documents and tenders
 router.get('/search', (req: Request, res: Response) => {

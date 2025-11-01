@@ -61,4 +61,21 @@ export const exportCSV = (analysisId: number) => {
 export const searchKB = (query: string) => api.get(`/kb/search?q=${encodeURIComponent(query)}`);
 export const chatWithKB = (message: string) => api.post('/kb/chat', { message });
 
+// File Servers
+export const getFileServers = () => api.get('/file-servers');
+export const getFileServer = (id: number) => api.get(`/file-servers/${id}`);
+export const createFileServer = (data: any) => api.post('/file-servers', data);
+export const updateFileServer = (id: number, data: any) => api.put(`/file-servers/${id}`, data);
+export const deleteFileServer = (id: number) => api.delete(`/file-servers/${id}`);
+export const testFileServerConnection = (id: number) => api.post(`/file-servers/${id}/test`);
+export const scanFileServer = (id: number) => api.post(`/file-servers/${id}/scan`);
+export const getFileServerLogs = (id: number, limit?: number) =>
+  api.get(`/file-servers/${id}/logs${limit ? `?limit=${limit}` : ''}`);
+
+// Chat/RAG
+export const chatQuery = (query: string, limit?: number) =>
+  api.post('/chat/query', { query, limit });
+export const chatReindex = () => api.post('/chat/reindex');
+export const getChatStats = () => api.get('/chat/stats');
+
 export default api;

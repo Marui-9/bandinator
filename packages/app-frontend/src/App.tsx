@@ -7,6 +7,7 @@ import {
   FileDown,
   Search,
   MessageSquare,
+  Server,
 } from 'lucide-react';
 import DocumentsPage from './pages/DocumentsPage';
 import TendersPage from './pages/TendersPage';
@@ -15,6 +16,7 @@ import AnalysisPage from './pages/AnalysisPage';
 import HomePage from './pages/HomePage';
 import ChatPage from './pages/ChatPage';
 import KBSearchPage from './pages/KBSearchPage';
+import FileServersPage from './pages/FileServersPage';
 
 function App() {
   return (
@@ -25,7 +27,7 @@ function App() {
             <div className="flex justify-between h-16">
               <div className="flex">
                 <div className="flex-shrink-0 flex items-center">
-                  <h1 className="text-2xl font-bold text-blue-600">Bandinator</h1>
+                  <h1 className="text-2xl font-bold text-blue-600">Team-Wiki</h1>
                 </div>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   <NavLink to="/" icon={<Database size={20} />}>
@@ -33,6 +35,9 @@ function App() {
                   </NavLink>
                   <NavLink to="/documents" icon={<FileText size={20} />}>
                     Documents
+                  </NavLink>
+                  <NavLink to="/file-servers" icon={<Server size={20} />}>
+                    File Servers
                   </NavLink>
                   <NavLink to="/tenders" icon={<FileDown size={20} />}>
                     Tenders
@@ -59,6 +64,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/documents" element={<DocumentsPage />} />
+            <Route path="/file-servers" element={<FileServersPage />} />
             <Route path="/tenders" element={<TendersPage />} />
             <Route path="/rules" element={<RulesPage />} />
             <Route path="/analysis" element={<AnalysisPage />} />

@@ -62,11 +62,13 @@ API Utils (Axios calls)
 ### Data Flow
 
 1. **Document Upload**:
+
    ```
    User → Upload File → Parse Content → Store in DB → Index for Search
    ```
 
 2. **Analysis Execution**:
+
    ```
    Select Tender → Load Rules → Evaluate Each Rule → Calculate Score → Save Results → Display
    ```
@@ -81,24 +83,28 @@ API Utils (Axios calls)
 The rule engine supports multiple rule types:
 
 ### 1. Keyword Match
+
 - **Type**: `keyword`
 - **Condition**: Comma-separated keywords
 - **Example**: `software,development,agile`
 - **Evaluation**: Checks if keywords appear in tender text
 
 ### 2. Budget Range
+
 - **Type**: `budget`
 - **Condition**: Range format `min-max`
 - **Example**: `10000-50000`
 - **Evaluation**: Checks if tender budget falls within range
 
 ### 3. Document Check
+
 - **Type**: `document`
 - **Condition**: Keywords to find in documents
 - **Example**: `certification,compliance`
 - **Evaluation**: Searches knowledge base for keywords
 
 ### 4. Custom
+
 - **Type**: `custom`
 - **Condition**: Custom text matching
 - **Example**: Any text pattern
@@ -154,19 +160,21 @@ Final Score = (Sum of Matched Rule Scores × Weights) / (Total Weight)
 ### Backend
 
 1. **Add a new route**:
+
    ```typescript
    // src/routes/newFeature.ts
    import { Router } from 'express';
    const router = Router();
-   
+
    router.get('/', (req, res) => {
      // Implementation
    });
-   
+
    export default router;
    ```
 
 2. **Register in index.ts**:
+
    ```typescript
    import newFeatureRoutes from './routes/newFeature';
    app.use('/api/new-feature', newFeatureRoutes);
@@ -186,6 +194,7 @@ Final Score = (Sum of Matched Rule Scores × Weights) / (Total Weight)
 ### Frontend
 
 1. **Add a new page**:
+
    ```typescript
    // src/pages/NewPage.tsx
    export default function NewPage() {
@@ -194,11 +203,13 @@ Final Score = (Sum of Matched Rule Scores × Weights) / (Total Weight)
    ```
 
 2. **Add route in App.tsx**:
+
    ```typescript
    <Route path="/new-feature" element={<NewPage />} />
    ```
 
 3. **Add navigation link**:
+
    ```typescript
    <NavLink to="/new-feature" icon={<Icon />}>
      New Feature
@@ -247,7 +258,7 @@ Run with: `pnpm test`
 ### View Database
 
 ```bash
-sqlite3 data/bandinator.db
+sqlite3 data/team-wiki.db
 ```
 
 ```sql
@@ -267,7 +278,7 @@ SELECT * FROM analysis_results;
 ### Reset Database
 
 ```bash
-rm data/bandinator.db
+rm data/team-wiki.db
 # Restart backend - database will be recreated
 ```
 

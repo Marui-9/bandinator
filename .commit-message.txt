@@ -1,6 +1,6 @@
-# Bandinator - Initial Setup
+# Team-Wiki - Initial Setup
 
-This commit sets up the complete monorepo structure for the Bandinator project.
+This commit sets up the complete monorepo structure for the Team-Wiki project.
 
 ## What's included:
 

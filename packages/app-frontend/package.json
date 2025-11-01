@@ -1,7 +1,8 @@
 {
   "name": "app-frontend",
   "version": "1.0.0",
-  "description": "Frontend for Bandinator",
+  "private": true,
+  "description": "Frontend for Team-Wiki",
   "type": "module",
   "scripts": {
     "dev": "vite",

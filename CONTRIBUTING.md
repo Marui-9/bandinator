@@ -1,6 +1,6 @@
-# Contributing to Bandinator
+# Contributing to Team-Wiki
 
-Thank you for your interest in contributing to Bandinator! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to Team-Wiki! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 
@@ -14,8 +14,8 @@ Thank you for your interest in contributing to Bandinator! This document provide
 1. **Fork the repository**
 2. **Clone your fork**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/bandinator.git
-   cd bandinator
+   git clone https://github.com/YOUR_USERNAME/team-wiki.git
+   cd team-wiki
    ```
 3. **Install dependencies**:
    ```bash
@@ -64,6 +64,7 @@ pnpm format
 We use conventional commits. Format: `type(scope): message`
 
 Types:
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation only
@@ -73,6 +74,7 @@ Types:
 - `chore`: Maintenance tasks
 
 Examples:
+
 ```bash
 git commit -m "feat(backend): add document search endpoint"
 git commit -m "fix(frontend): resolve upload button state"
@@ -92,6 +94,7 @@ Then open a pull request on GitHub.
 ### PR Title
 
 Use conventional commit format:
+
 ```
 feat(scope): add new feature
 fix(scope): resolve issue with X
@@ -100,6 +103,7 @@ fix(scope): resolve issue with X
 ### PR Description
 
 Include:
+
 - **What**: Brief description of changes
 - **Why**: Reason for the changes
 - **How**: Implementation approach
@@ -107,28 +111,35 @@ Include:
 - **Screenshots**: For UI changes
 
 Template:
+
 ```markdown
 ## What
+
 Brief description of the changes
 
 ## Why
+
 Explanation of why these changes are needed
 
 ## How
+
 Technical approach and implementation details
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Manual testing completed
 - [ ] All tests passing
 
 ## Screenshots (if applicable)
+
 [Add screenshots here]
 ```
 
 ### Checklist
 
 Before submitting, ensure:
+
 - [ ] Code follows project style
 - [ ] Tests pass (`pnpm test`)
 - [ ] Linting passes (`pnpm lint`)
@@ -139,7 +150,7 @@ Before submitting, ensure:
 ## Project Structure
 
 ```
-bandinator/
+team-wiki/
 ├── packages/
 │   ├── app-backend/      # Backend API
 │   └── app-frontend/     # Frontend UI
@@ -213,12 +224,14 @@ describe('Component', () => {
 ## Documentation
 
 Update documentation when:
+
 - Adding new features
 - Changing APIs
 - Modifying setup process
 - Adding dependencies
 
 Files to update:
+
 - `README.md` - Project overview
 - `SETUP.md` - Installation guide
 - `DEVELOPMENT.md` - Developer guide
@@ -230,6 +243,7 @@ Files to update:
 ### Bug Reports
 
 Include:
+
 - Clear description
 - Steps to reproduce
 - Expected behavior
@@ -240,6 +254,7 @@ Include:
 ### Feature Requests
 
 Include:
+
 - Use case
 - Proposed solution
 - Alternative solutions
@@ -255,6 +270,7 @@ Include:
 ## Recognition
 
 Contributors will be recognized in:
+
 - README.md contributors section
 - Release notes
 - Project documentation
@@ -265,4 +281,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-Thank you for contributing to Bandinator! 🎉
+Thank you for contributing to Team-Wiki! 🎉

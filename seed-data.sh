@@ -5,7 +5,14 @@
 
 API_URL="http://localhost:3001/api"
 
-echo "🌱 Seeding Bandinator with sample data..."
+#!/bin/bash
+set -e
+
+# Database path
+DB="data/team-wiki.db"
+
+# Check if database exists
+echo "🌱 Seeding Team-Wiki with sample data..."
 echo ""
 
 # Wait for backend to be ready

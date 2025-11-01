@@ -12,7 +12,7 @@
 ### In Your External Terminal (with Node.js v22.20.0):
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm dev
 ```
 
@@ -54,14 +54,14 @@ lsof -ti:3000 | xargs kill -9
 Terminal 1:
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm --filter app-backend dev
 ```
 
 Terminal 2:
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm --filter app-frontend dev
 ```
 

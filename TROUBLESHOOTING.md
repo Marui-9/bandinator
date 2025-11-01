@@ -17,7 +17,7 @@ The backend server is **not running**. VS Code's Flatpak terminal environment do
 2. **Navigate to project directory:**
 
    ```bash
-   cd /home/jacob/Desktop/bandinator
+   cd /home/jacob/Desktop/team-wiki
    ```
 
 3. **Start the development servers:**
@@ -41,14 +41,14 @@ If `pnpm dev` doesn't work, start them individually:
 **Terminal 1 (Backend):**
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm --filter app-backend dev
 ```
 
 **Terminal 2 (Frontend):**
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm --filter app-frontend dev
 ```
 
@@ -56,7 +56,7 @@ pnpm --filter app-frontend dev
 
 ```bash
 # Start backend in background
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 tmux new-session -d -s backend 'pnpm --filter app-backend dev'
 
 # Start frontend in background
@@ -128,7 +128,7 @@ nvm use 22
 
 ```bash
 # Delete and recreate database
-rm data/bandinator.db
+rm data/team-wiki.db
 pnpm dev  # Will recreate on startup
 ```
 
@@ -171,7 +171,7 @@ Install VS Code directly from Microsoft's RPM/DEB instead of Flatpak.
 
 ```bash
 # In external terminal (not VS Code):
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm dev
 
 # Then in browser:
@@ -197,7 +197,7 @@ pnpm dev
 3. Verify you're in the right directory:
 
    ```bash
-   pwd  # Should show: /home/jacob/Desktop/bandinator
+   pwd  # Should show: /home/jacob/Desktop/team-wiki
    ls package.json  # Should exist
    ```
 
@@ -206,7 +206,7 @@ pnpm dev
 ## Success Checklist
 
 - [ ] Opened external terminal (outside VS Code)
-- [ ] Navigated to `/home/jacob/Desktop/bandinator`
+- [ ] Navigated to `/home/jacob/Desktop/team-wiki`
 - [ ] Confirmed Node.js v22.20.0 is active
 - [ ] Ran `pnpm dev`
 - [ ] See "Backend server running" message

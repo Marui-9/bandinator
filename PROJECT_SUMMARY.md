@@ -1,8 +1,8 @@
 # Project Summary
 
-## What is Bandinator?
+## What is Team-Wiki?
 
-Bandinator is a demo web application that provides intelligent tender analysis with automated feasibility scoring. It allows users to:
+Team-Wiki is a demo web application that provides intelligent tender analysis with automated feasibility scoring. It allows users to:
 
 1. **Build a Knowledge Base**: Upload and index documents (PDF, DOCX, TXT)
 2. **Manage Tenders**: Create and track tender opportunities
@@ -13,18 +13,21 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 ## Key Features
 
 ### 🔍 Intelligent Analysis
+
 - **Rule-based scoring** with customizable weights
 - **Multiple rule types**: keyword matching, budget validation, document checks
 - **Evidence tracking** with source links
 - **Confidence scoring** based on data quality
 
 ### 📄 Document Management
+
 - **Multi-format support**: PDF, DOCX, TXT
 - **Automatic parsing** and text extraction
 - **Full-text search** across all documents
 - **Metadata tracking** (size, type, upload date)
 
 ### ⚙️ Flexible Rules Engine
+
 - **Keyword rules**: Match terms in tender descriptions
 - **Budget rules**: Validate budget ranges
 - **Document rules**: Check knowledge base content
@@ -32,6 +35,7 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 - **Weight system**: Prioritize important rules
 
 ### 📊 Comprehensive Reporting
+
 - **One-page PDF reports** with scores and evidence
 - **CSV exports** for further analysis
 - **Visual scoring** with color-coded results
@@ -40,6 +44,7 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 ## Technology Stack
 
 ### Backend
+
 - **Node.js 20+** with TypeScript
 - **Express.js** for REST API
 - **SQLite** for data storage
@@ -48,6 +53,7 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 - **PDFKit** for PDF generation
 
 ### Frontend
+
 - **React 18** with TypeScript
 - **Vite** for fast development
 - **TailwindCSS** for styling
@@ -56,6 +62,7 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 - **Lucide React** for icons
 
 ### Infrastructure
+
 - **pnpm** workspaces for monorepo
 - **Docker** with docker-compose
 - **GitHub Actions** for CI/CD
@@ -129,26 +136,31 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 ## API Overview
 
 ### Documents API
+
 - Upload files with automatic parsing
 - Search full-text content
 - Manage document lifecycle
 
 ### Tenders API
+
 - CRUD operations for tenders
 - Track deadlines and budgets
 - Store requirements
 
 ### Rules API
+
 - Configure analysis rules
 - Enable/disable rules
 - Set rule weights
 
 ### Analysis API
+
 - Execute analysis on demand
 - Store results with evidence
 - Retrieve historical analyses
 
 ### Export API
+
 - Generate PDF reports
 - Export CSV data
 - Download results
@@ -156,28 +168,36 @@ Bandinator is a demo web application that provides intelligent tender analysis w
 ## Use Cases
 
 ### 1. RFP Evaluation
+
 Evaluate Request for Proposals (RFPs) against company capabilities:
+
 - Upload past project documents
 - Configure rules for required skills
 - Analyze new RFPs for fit
 - Generate bid/no-bid recommendations
 
 ### 2. Tender Screening
+
 Screen tender opportunities efficiently:
+
 - Set budget constraints
 - Define technology requirements
 - Auto-score based on keywords
 - Prioritize high-match tenders
 
 ### 3. Compliance Checking
+
 Ensure tender compliance:
+
 - Upload compliance documents
 - Create compliance rules
 - Check tender requirements
 - Generate compliance reports
 
 ### 4. Competitive Analysis
+
 Compare tender opportunities:
+
 - Define evaluation criteria
 - Score multiple tenders
 - Export comparison data
@@ -186,26 +206,32 @@ Compare tender opportunities:
 ## Deployment Options
 
 ### 1. Development
+
 ```bash
 pnpm dev
 ```
+
 - Hot reload enabled
 - Debug logging
 - Local SQLite database
 
 ### 2. Docker
+
 ```bash
 docker-compose up -d
 ```
+
 - Containerized deployment
 - Production-ready
 - Easy scaling
 
 ### 3. Manual Production
+
 ```bash
 pnpm build
 node packages/app-backend/dist/index.js
 ```
+
 - Build artifacts
 - Custom hosting
 - Full control
@@ -213,26 +239,31 @@ node packages/app-backend/dist/index.js
 ## Extensibility
 
 ### Adding New Rule Types
+
 1. Update rule evaluation in `analysis.ts`
 2. Add UI for rule configuration
 3. Document rule format
 
 ### Adding Document Types
+
 1. Add parser in `parser.ts`
 2. Update file validation
 3. Test parsing logic
 
 ### Adding Export Formats
+
 1. Create generator service
 2. Add export endpoint
 3. Update UI with download button
 
 ### Integrating External APIs
+
 1. Add API credentials to `.env`
 2. Create service wrapper
 3. Use in analysis engine
 
 ### Adding Authentication
+
 1. Install auth library (e.g., Passport)
 2. Add user schema
 3. Protect routes
@@ -241,18 +272,21 @@ node packages/app-backend/dist/index.js
 ## Performance Considerations
 
 ### Database Optimization
+
 - Add indexes for frequent queries
 - Use prepared statements
 - Implement pagination
 - Consider PostgreSQL for scale
 
 ### Frontend Optimization
+
 - Code splitting with React.lazy
 - Image optimization
 - Bundle size analysis
 - Caching strategies
 
 ### Backend Optimization
+
 - Request caching
 - Database connection pooling
 - Async processing for large files
@@ -261,12 +295,14 @@ node packages/app-backend/dist/index.js
 ## Security Considerations
 
 ### Current Implementation
+
 - Input validation with Zod
 - Parameterized SQL queries
 - File type validation
 - CORS configuration
 
 ### Production Recommendations
+
 - Add authentication/authorization
 - Implement rate limiting
 - Use HTTPS/TLS
@@ -277,6 +313,7 @@ node packages/app-backend/dist/index.js
 ## Future Enhancements
 
 ### Short Term
+
 - [ ] Vector search for semantic matching
 - [ ] Real-time collaboration
 - [ ] Email notifications
@@ -284,6 +321,7 @@ node packages/app-backend/dist/index.js
 - [ ] Bulk operations
 
 ### Medium Term
+
 - [ ] AI-powered rule suggestions
 - [ ] Natural language queries
 - [ ] Mobile app
@@ -291,6 +329,7 @@ node packages/app-backend/dist/index.js
 - [ ] Integration with popular CRMs
 
 ### Long Term
+
 - [ ] Machine learning scoring
 - [ ] Predictive analytics
 - [ ] Blockchain for auditability

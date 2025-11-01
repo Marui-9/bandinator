@@ -1,7 +1,6 @@
 import express, { Request, Response, NextFunction, Application } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import path from 'path';
 import fs from 'fs';
 
 // Import routes
@@ -11,6 +10,8 @@ import rulesRoutes from './routes/rules';
 import analysisRoutes from './routes/analysis';
 import exportRoutes from './routes/export';
 import kbRoutes from './routes/kb';
+import fileServerRoutes from './routes/fileServers';
+import chatRoutes from './routes/chat';
 
 // Import database initialization
 import { initDatabase } from './services/database';
@@ -56,6 +57,8 @@ app.use('/api/rules', rulesRoutes);
 app.use('/api/analysis', analysisRoutes);
 app.use('/api/export', exportRoutes);
 app.use('/api/kb', kbRoutes);
+app.use('/api/file-servers', fileServerRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Error handling middleware
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {

@@ -87,7 +87,7 @@ export default function HomePage() {
     <div className="space-y-8">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg p-8 text-white">
-        <h1 className="text-4xl font-bold mb-2">Welcome to Bandinator</h1>
+        <h1 className="text-4xl font-bold mb-2">Welcome to Team-Wiki</h1>
         <p className="text-lg text-blue-100">
           Intelligent tender analysis with automated feasibility scoring
         </p>

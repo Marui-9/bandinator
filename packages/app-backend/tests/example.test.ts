@@ -6,7 +6,7 @@ describe('Example Test Suite', () => {
   });
 
   it('should handle strings', () => {
-    const greeting = 'Hello, Bandinator!';
-    expect(greeting).toContain('Bandinator');
+    const greeting = 'Hello, Team-Wiki!';
+    expect(greeting).toContain('Team-Wiki');
   });
 });

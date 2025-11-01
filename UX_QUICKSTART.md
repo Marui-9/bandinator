@@ -207,7 +207,7 @@ PINECONE_ENVIRONMENT=...        # Optional
 
 ```bash
 # If migration fails, recreate database:
-rm data/bandinator.db
+rm data/team-wiki.db
 pnpm dev  # Will recreate with new schema
 ```
 
@@ -241,7 +241,7 @@ VITE_PORT=3001
 - Check `UX_ENHANCEMENT_SUMMARY.md` for detailed implementation notes
 - Review console logs for errors (F12 in browser)
 - Verify backend is running on port 3001
-- Ensure database file exists: `data/bandinator.db`
+- Ensure database file exists: `data/team-wiki.db`
 
 ## Credits
 

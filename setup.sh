@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Bandinator Setup Script
-# This script sets up the development environment for Bandinator
+# Team-Wiki Setup Script
+# This script sets up the development environment for Team-Wiki
 
 set -e
 
-echo "🚀 Setting up Bandinator..."
+echo "🚀 Setting up Team-Wiki..."
 
 # Check Node.js version
 echo "Checking Node.js version..."

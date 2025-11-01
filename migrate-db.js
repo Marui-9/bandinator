@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbPath = path.join(__dirname, 'data', 'bandinator.db');
+const dbPath = path.join(__dirname, 'data', 'team-wiki.db');
 
 try {
   console.log('🔄 Starting database migration...');

@@ -1,11 +1,23 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send, MessageSquare, Bot, User } from 'lucide-react';
-import { chatWithKB } from '../utils/api';
+import { Send, MessageSquare, Bot, User, FileText, ExternalLink, Sparkles } from 'lucide-react';
+import { chatQuery } from '../utils/api';
+
+interface Citation {
+  documentId: number;
+  chunkId: number;
+  filePath: string;
+  title: string;
+  page?: number;
+  paragraph?: number;
+  excerpt: string;
+  score: number;
+}
 
 interface Message {
   id: string;
   role: 'user' | 'assistant';
   content: string;
+  citations?: Citation[];
   timestamp: Date;
 }
 
@@ -31,7 +43,8 @@ export default function ChatPage() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!input.trim() || loading) return;
 
     const userMessage: Message = {
@@ -46,59 +59,50 @@ export default function ChatPage() {
     setLoading(true);
 
     try {
-      const response = await chatWithKB(input.trim());
+      const response = await chatQuery(input.trim());
 
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
-        content: response.data.response,
+        content: response.data.answer,
+        citations: response.data.citations,
         timestamp: new Date(),
       };
 
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
       console.error('Chat error:', error);
-
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
         content: 'Sorry, I encountered an error processing your request. Please try again.',
         timestamp: new Date(),
       };
-
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
-
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="bg-white rounded-lg shadow">
-        {/* Header */}
-        <div className="border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div className="bg-blue-100 p-2 rounded-lg">
-              <MessageSquare className="text-blue-600" size={24} />
-            </div>
+      <div
+        className="bg-white shadow rounded-lg overflow-hidden flex flex-col"
+        style={{ height: 'calc(100vh - 12rem)' }}
+      >
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4">
+          <div className="flex items-center gap-2">
+            <MessageSquare size={24} />
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Chat with Knowledge Base</h1>
-              <p className="text-sm text-gray-600">
-                Ask questions about your documents and tenders
+              <h2 className="text-xl font-bold">Knowledge Base Chat</h2>
+              <p className="text-sm text-blue-100">
+                Ask questions and get AI-powered answers with citations
               </p>
             </div>
           </div>
         </div>
 
-        {/* Chat messages */}
-        <div className="h-[500px] overflow-y-auto p-6 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {messages.map(message => (
             <div
               key={message.id}
@@ -106,31 +110,78 @@ export default function ChatPage() {
             >
               {message.role === 'assistant' && (
                 <div className="flex-shrink-0">
-                  <div className="bg-blue-100 p-2 rounded-full">
-                    <Bot size={20} className="text-blue-600" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                    <Bot size={18} className="text-white" />
                   </div>
                 </div>
               )}
 
               <div
-                className={`max-w-[70%] rounded-lg p-4 ${
-                  message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-900'
-                }`}
+                className={`flex-1 max-w-2xl ${message.role === 'user' ? 'flex justify-end' : ''}`}
               >
-                <p className="whitespace-pre-wrap">{message.content}</p>
-                <p
-                  className={`text-xs mt-2 ${
-                    message.role === 'user' ? 'text-blue-100' : 'text-gray-500'
+                <div
+                  className={`rounded-lg p-4 ${
+                    message.role === 'user' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-900'
                   }`}
                 >
-                  {message.timestamp.toLocaleTimeString()}
-                </p>
+                  <p className="whitespace-pre-wrap">{message.content}</p>
+                  <p
+                    className={`text-xs mt-2 ${message.role === 'user' ? 'text-blue-100' : 'text-gray-500'}`}
+                  >
+                    {message.timestamp.toLocaleTimeString()}
+                  </p>
+                </div>
+
+                {message.citations && message.citations.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    <div className="flex items-center gap-1 text-sm font-medium text-gray-700">
+                      <Sparkles size={14} className="text-yellow-500" />
+                      <span>Sources ({message.citations.length})</span>
+                    </div>
+                    {message.citations.map(citation => (
+                      <div
+                        key={`${citation.documentId}-${citation.chunkId}`}
+                        className="bg-white border border-gray-200 rounded-lg p-3 text-sm hover:shadow-md transition-shadow"
+                      >
+                        <div className="flex items-start justify-between gap-2 mb-2">
+                          <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <FileText size={16} className="text-blue-600 flex-shrink-0" />
+                            <span className="font-medium text-gray-900 truncate">
+                              {citation.title}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                              {Math.round(citation.score * 100)}% match
+                            </span>
+                            <button
+                              onClick={() =>
+                                window.open(`/documents/${citation.documentId}`, '_blank')
+                              }
+                              className="text-blue-600 hover:text-blue-800"
+                              title="Open document"
+                            >
+                              <ExternalLink size={14} />
+                            </button>
+                          </div>
+                        </div>
+                        <p className="text-gray-600 text-xs line-clamp-2 mb-1">
+                          {citation.excerpt}
+                        </p>
+                        <div className="flex gap-2 text-xs text-gray-500">
+                          {citation.page && <span>Page {citation.page}</span>}
+                          {citation.paragraph && <span>¶ {citation.paragraph}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {message.role === 'user' && (
                 <div className="flex-shrink-0">
-                  <div className="bg-blue-600 p-2 rounded-full">
-                    <User size={20} className="text-white" />
+                  <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center">
+                    <User size={18} className="text-white" />
                   </div>
                 </div>
               )}
@@ -140,8 +191,8 @@ export default function ChatPage() {
           {loading && (
             <div className="flex gap-3 justify-start">
               <div className="flex-shrink-0">
-                <div className="bg-blue-100 p-2 rounded-full">
-                  <Bot size={20} className="text-blue-600" />
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                  <Bot size={18} className="text-white" />
                 </div>
               </div>
               <div className="bg-gray-100 rounded-lg p-4">
@@ -162,34 +213,28 @@ export default function ChatPage() {
               </div>
             </div>
           )}
-
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input area */}
         <div className="border-t border-gray-200 p-4">
-          <div className="flex gap-2">
-            <textarea
+          <form onSubmit={handleSubmit} className="flex gap-2">
+            <input
+              type="text"
               value={input}
               onChange={e => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
               placeholder="Ask a question about your documents..."
-              className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-              rows={2}
+              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               disabled={loading}
             />
             <button
-              onClick={handleSend}
-              disabled={!input.trim() || loading}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2 self-end"
+              type="submit"
+              disabled={loading || !input.trim()}
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
             >
-              <Send size={20} />
+              <Send size={18} />
               Send
             </button>
-          </div>
-          <p className="text-xs text-gray-500 mt-2">
-            Press Enter to send, Shift+Enter for new line
-          </p>
+          </form>
         </div>
       </div>
     </div>

@@ -98,7 +98,7 @@
 ### 1. Install Dependencies (Required)
 
 ```bash
-cd /home/jacob/Desktop/bandinator
+cd /home/jacob/Desktop/team-wiki
 pnpm install
 ```
 
@@ -206,7 +206,7 @@ ALTER TABLE tenders ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 If you have existing data, either:
 
-1. Delete `data/bandinator.db` and let it recreate
+1. Delete `data/team-wiki.db` and let it recreate
 2. Or run migration SQL above
 
 ## 🎯 Success Criteria
@@ -224,7 +224,7 @@ If you encounter issues:
 
 1. Check console logs in browser (F12)
 2. Check backend terminal for errors
-3. Verify database file exists: `data/bandinator.db`
+3. Verify database file exists: `data/team-wiki.db`
 4. Try deleting node_modules and reinstalling
 
 ## 🎉 Summary

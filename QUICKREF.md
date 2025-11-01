@@ -1,4 +1,4 @@
-# Bandinator - Quick Reference
+# Team-Wiki - Quick Reference
 
 ## 🚀 Quick Start Commands
 
@@ -22,7 +22,7 @@ chmod +x seed-data.sh && ./seed-data.sh
 ## 📁 Project Structure
 
 ```
-bandinator/
+team-wiki/
 ├── packages/
 │   ├── app-backend/       Backend API (http://localhost:3001)
 │   └── app-frontend/      Frontend UI (http://localhost:3000)
@@ -34,6 +34,7 @@ bandinator/
 ## 🔗 API Endpoints
 
 ### Documents
+
 - `POST /api/documents/upload` - Upload file
 - `GET /api/documents` - List all
 - `GET /api/documents/:id` - Get one
@@ -41,6 +42,7 @@ bandinator/
 - `GET /api/documents/search?q=query` - Search
 
 ### Tenders
+
 - `POST /api/tenders` - Create
 - `GET /api/tenders` - List all
 - `GET /api/tenders/:id` - Get one
@@ -48,6 +50,7 @@ bandinator/
 - `DELETE /api/tenders/:id` - Delete
 
 ### Rules
+
 - `POST /api/rules` - Create
 - `GET /api/rules` - List all
 - `GET /api/rules/:id` - Get one
@@ -55,22 +58,24 @@ bandinator/
 - `DELETE /api/rules/:id` - Delete
 
 ### Analysis
+
 - `POST /api/analysis/run/:tenderId` - Run analysis
 - `GET /api/analysis/tender/:tenderId` - Get results
 - `GET /api/analysis/:id` - Get one result
 
 ### Export
+
 - `GET /api/export/pdf/:analysisId` - PDF report
 - `GET /api/export/csv/:analysisId` - CSV export
 
 ## 🎯 Rule Types
 
-| Type | Condition Format | Example |
-|------|------------------|---------|
-| `keyword` | Comma-separated keywords | `software,development,agile` |
-| `budget` | Range: `min-max` | `10000-50000` |
-| `document` | Keywords in docs | `certification,compliance` |
-| `custom` | Any text | `custom condition` |
+| Type       | Condition Format         | Example                      |
+| ---------- | ------------------------ | ---------------------------- |
+| `keyword`  | Comma-separated keywords | `software,development,agile` |
+| `budget`   | Range: `min-max`         | `10000-50000`                |
+| `document` | Keywords in docs         | `certification,compliance`   |
+| `custom`   | Any text                 | `custom condition`           |
 
 ## 💻 Development Commands
 
@@ -116,7 +121,7 @@ docker-compose up -d --build
 
 ```bash
 # Open database
-sqlite3 data/bandinator.db
+sqlite3 data/team-wiki.db
 
 # Common queries
 .tables                           # List tables
@@ -130,6 +135,7 @@ SELECT * FROM analysis_results;   # View analyses
 ## 🔧 Troubleshooting
 
 ### Port already in use
+
 ```bash
 # Kill process on port 3001 (backend)
 lsof -ti:3001 | xargs kill -9
@@ -139,18 +145,21 @@ lsof -ti:3000 | xargs kill -9
 ```
 
 ### Clear and reinstall
+
 ```bash
 rm -rf node_modules packages/*/node_modules
 pnpm install
 ```
 
 ### Reset database
+
 ```bash
-rm data/bandinator.db
+rm data/team-wiki.db
 pnpm dev  # Database will be recreated
 ```
 
 ### Clear uploads
+
 ```bash
 rm -rf uploads/*
 ```
@@ -196,7 +205,7 @@ PORT=3001
 CORS_ORIGIN=http://localhost:3000
 
 # Database
-DATABASE_URL=./data/bandinator.db
+DATABASE_URL=./data/team-wiki.db
 
 # Upload
 MAX_FILE_SIZE=10485760
@@ -272,6 +281,7 @@ docker-compose up -d
 ---
 
 **Quick Links:**
+
 - Backend: http://localhost:3001
 - Frontend: http://localhost:3000
 - API Health: http://localhost:3001/health

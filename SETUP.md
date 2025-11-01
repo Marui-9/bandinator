@@ -1,4 +1,4 @@
-# Setup Instructions for Bandinator
+# Setup Instructions for Team-Wiki
 
 ## Prerequisites
 
@@ -15,6 +15,7 @@ Before you begin, ensure you have the following installed:
 If you don't have Node.js 20+ installed:
 
 **Linux/macOS:**
+
 ```bash
 # Using nvm (recommended)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -36,6 +37,7 @@ chmod +x setup.sh
 ```
 
 The setup script will:
+
 - Check Node.js version
 - Install pnpm globally
 - Install all project dependencies
@@ -54,7 +56,7 @@ PORT=3001
 CORS_ORIGIN=http://localhost:3000
 
 # Database
-DATABASE_URL=./data/bandinator.db
+DATABASE_URL=./data/team-wiki.db
 
 # File Upload
 MAX_FILE_SIZE=10485760
@@ -72,6 +74,7 @@ pnpm dev
 ```
 
 This will start:
+
 - **Backend API** at http://localhost:3001
 - **Frontend** at http://localhost:3000
 
@@ -153,7 +156,7 @@ docker-compose up -d  # Run in Docker containers
 ## Project Structure
 
 ```
-bandinator/
+team-wiki/
 ├── packages/
 │   ├── app-backend/          # Express API server
 │   │   ├── src/
@@ -196,6 +199,7 @@ VITE_API_URL=http://localhost:3002  # Update frontend to match
 ```
 
 Then start with custom port:
+
 ```bash
 # Frontend will use PORT from vite.config.ts
 pnpm dev
@@ -206,7 +210,7 @@ pnpm dev
 Delete and recreate the database:
 
 ```bash
-rm data/bandinator.db
+rm data/team-wiki.db
 pnpm dev  # Database will be recreated
 ```
 
@@ -269,6 +273,7 @@ npx serve dist
 ## Support
 
 For issues or questions:
+
 - Check existing issues in the repository
 - Review the documentation
 - Create a new issue with detailed information

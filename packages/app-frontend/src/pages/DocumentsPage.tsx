@@ -10,6 +10,10 @@ interface Document {
   file_size: number;
   attributes?: string; // JSON string of attributes
   created_at: string;
+  source_type?: 'upload' | 'file_server';
+  source_host?: string;
+  file_path?: string;
+  last_modified?: string;
 }
 
 interface DocumentAttributes {
@@ -312,11 +316,25 @@ export default function DocumentsPage() {
                   <div className="flex items-center gap-3 flex-1">
                     <FileText size={24} className="text-blue-600 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <p className="font-medium text-gray-900">{doc.original_name}</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="font-medium text-gray-900">{doc.original_name}</p>
+                        {doc.source_type === 'file_server' && (
+                          <span className="px-2 py-0.5 bg-indigo-100 text-indigo-800 rounded text-xs font-medium">
+                            File Server
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-gray-500">
                         {(doc.file_size / 1024).toFixed(2)} KB •{' '}
                         {new Date(doc.created_at).toLocaleDateString()}
                       </p>
+                      {doc.source_type === 'file_server' && (doc.source_host || doc.file_path) && (
+                        <div className="mt-1 text-xs text-gray-600">
+                          {doc.source_host && <span>📡 {doc.source_host}</span>}
+                          {doc.source_host && doc.file_path && <span className="mx-1">•</span>}
+                          {doc.file_path && <span>📄 {doc.file_path}</span>}
+                        </div>
+                      )}
                       {(attrs.category || attrs.domain || attrs.project || attrs.tags) && (
                         <div className="flex flex-wrap gap-2 mt-2">
                           {attrs.category && (
